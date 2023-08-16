@@ -6,18 +6,48 @@ import { AppService } from './app.service';
 // Repository依赖DataSource来建立连接 DataSource又需要从Config对象拿到用户名密码等信息
 @Controller()
 export class AppController {
+  // 构造器注入 用class做token
   // constructor(private readonly appService: AppService) {}
+  // 构造器注入 如果token为字符串 相比之下用class做token可以省去 @Inject 比较简便
+  // constructor(@Inject('app_service') private readonly appService: AppService) {}
+  // 构造器注入方式 person
+  // constructor(
+  //   @Inject('person') private readonly person: { name: string; age: number },
+  // ) {}
+  // 构造器注入方式  注入动态创建的对象
   constructor(
-    @Inject('app_service')
-    private readonly appService: AppService,
-    @Inject('person')
-    private readonly person: { name: string; age: number },
+    @Inject('person2')
+    private readonly person2: { name: string; desc: string },
   ) {}
+
+  // 属性注入方式 通过@Inject指定注入的provider的token即可
+  // @Inject(AppService)
+  // private readonly appService: AppService;
+  // 属性注入方式  如果token是字符串
+  // @Inject('app_service')
+  // private readonly appService: AppService;
+  // 属性注入方式 注入直接指定值的service
+  @Inject('person')
+  private readonly person: { name: string; age: number };
+
+  @Inject('person3')
+  private readonly person3;
+
+  @Inject('person5')
+  private readonly person5: { name: string; desc: string };
+
+  @Inject('person4')
+  private readonly person4;
 
   @Get()
   getHello(): string {
-    console.log(this.person);
-    return this.appService.getHello();
+    // console.log(this.person);
+    // console.log(this.person2);
+    // console.log(this.person3);
+    // return this.appService.getHello();
+    // console.log(this.person5);
+    // console.log(this.person4);
+    return JSON.stringify(this.person);
   }
 }
 
