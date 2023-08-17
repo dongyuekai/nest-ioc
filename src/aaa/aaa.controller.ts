@@ -58,21 +58,21 @@ export class ValidationPipe implements PipeTransform {
   }
 }
 
-@Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
-    const status = exception.getStatus();
+// @Catch(HttpException)
+// export class HttpExceptionFilter implements ExceptionFilter {
+//   catch(exception: HttpException, host: ArgumentsHost) {
+//     const ctx = host.switchToHttp();
+//     const response = ctx.getResponse<Response>();
+//     const request = ctx.getRequest<Request>();
+//     const status = exception.getStatus();
 
-    response.status(status).json({
-      statusCode: status,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-    });
-  }
-}
+//     response.status(status).json({
+//       statusCode: status,
+//       timestamp: new Date().toISOString(),
+//       path: request.url,
+//     });
+//   }
+// }
 
 @Controller('aaa')
 // @UseGuards(RolesGuard) // Guard 是路由守卫的意思，可以用于在调用某个 Controller 之前判断权限，返回 true 或者 false 来决定是否放行 单独使用 仅仅作用于此controller
