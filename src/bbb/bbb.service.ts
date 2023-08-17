@@ -18,7 +18,7 @@ export class BbbService
   }
 
   findAll() {
-    return `This action returns all bbb` + this.aaaService.findAll();
+    return `This action returns all bbb. ` + this.aaaService.findAll();
   }
 
   findOne(id: number) {
